@@ -6,37 +6,52 @@ using UnityEngine;
 
 public class GazeDataLogger : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        LogCurrentGazeTarget();
-        LogGazeDirectionOrigin();
-        LogHitPosition();
+        StartCoroutine(GazeLogger());
     }
 
-    void LogCurrentGazeTarget()
+    private void Update()
     {
-        if (CoreServices.InputSystem.GazeProvider.GazeTarget)
-        {
-            Debug.Log("User gaze is currently over game object: " + CoreServices.InputSystem.GazeProvider.GazeTarget);
-        }
-        else
-        {
-            Debug.Log("This is not working");
-        }
-    }
-
-    void LogGazeDirectionOrigin()
-    {
-        Debug.Log("Gaze is looking in direction: " + CoreServices.InputSystem.GazeProvider.GazeDirection);
-        
-        Debug.Log("Gaze Origin is: " + CoreServices.InputSystem.GazeProvider.GazeOrigin);
-    }
-
-    void LogHitPosition()
-    {
-        Debug.Log("Gaze hit an object at: " + CoreServices.InputSystem.GazeProvider.HitPosition);
+        //string yeet = TestGazeLogger();
+        //Debug.Log(yeet);
     }
     
-    
+
+    IEnumerator GazeLogger()
+    {
+        while (true)
+        {
+            //Grab Gaze Info
+            Vector3 GazeOrigin = CoreServices.InputSystem.GazeProvider.GazeOrigin;
+            Vector3 GazeHit = CoreServices.InputSystem.GazeProvider.HitPosition;
+            string GazeObject = CoreServices.InputSystem.GazeProvider.GazeTarget.ToString();
+            Vector3 GazeLook = CoreServices.InputSystem.GazeProvider.GazeDirection;
+            //Format Output
+            string log_info = String.Format("Gaze Origin: {0:0.00}, Gaze Hit: {1:0.00}, Gaze Object: {2}, " +
+                                            "Gaze Look: {3:0.00}", GazeOrigin, GazeHit, GazeObject, GazeLook);
+            //Log to Console
+            Debug.Log(log_info);
+
+            yield return new WaitForSeconds(.1f);
+        }
+
+    }
+
+    string TestGazeLogger()
+    {
+        Vector3 GazeOrigin = CoreServices.InputSystem.GazeProvider.GazeOrigin;
+        //Vector3 GazeHit = CoreServices.InputSystem.GazeProvider.HitPosition;
+        //string GazeObject = CoreServices.InputSystem.GazeProvider.GazeTarget.ToString();
+        Vector3 GazeLook = CoreServices.InputSystem.GazeProvider.GazeDirection;
+        //Format it?
+        string Gaze_Origin = String.Format("{0:0.00}", GazeOrigin);
+        //string Gaze_Hit = String.Format("{0:0.00}", GazeHit);
+        //string Gaze_Object = String.Format("{0:0.00}", GazeObject);
+        string Gaze_Look = String.Format("{0:0.00}", GazeLook);
+        string log_info = String.Format("Gaze Origin: {0:0.00}, Gaze Hit: {1}, Gaze Object: {2}, Gaze Look: {3}",
+            GazeOrigin, "Gaze_Hit", "Gaze_Object", Gaze_Look);
+
+        return log_info;
+    }
 }
