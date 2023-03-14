@@ -25,7 +25,7 @@ public class GazeDataLogger : MonoBehaviour
             //Grab Gaze Info
             Vector3 GazeOrigin = CoreServices.InputSystem.GazeProvider.GazeOrigin;
             Vector3 GazeHit = CoreServices.InputSystem.GazeProvider.HitPosition;
-            string GazeObject = CoreServices.InputSystem.GazeProvider.GazeTarget.ToString();
+            GameObject GazeObject = CoreServices.InputSystem.GazeProvider.GazeTarget;
             Vector3 GazeLook = CoreServices.InputSystem.GazeProvider.GazeDirection;
             //Format Output
             string log_info = String.Format("Gaze Origin: {0:0.00}, Gaze Hit: {1:0.00}, Gaze Object: {2}, " +
