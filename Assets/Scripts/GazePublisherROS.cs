@@ -26,15 +26,19 @@ public class GazePublisherROS : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        float gazeDirectionX = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.x;
+        float gazeDirectionY = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.y;
+        float gazeDirectionZ = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.z;
+
         timeElapsed += Time.deltaTime;
 
         if(timeElapsed > publishMessageFrequency)
         {
             PosRotMsg gazePos = new PosRotMsg(
-                CoreServices.InputSystem.GazeProvider.GazeDirection.x,
-                CoreServices.InputSystem.GazeProvider.GazeDirection.y,
-                CoreServices.InputSystem.GazeProvider.GazeDirection.z,
+                gazeDirectionX,
+                gazeDirectionY,
+                gazeDirectionZ,
                 rotX,
                 rotY,
                 rotZ,
