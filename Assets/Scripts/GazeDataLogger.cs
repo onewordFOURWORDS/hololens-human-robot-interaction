@@ -4,11 +4,27 @@ using System;
 using Microsoft.MixedReality.Toolkit;
 using UnityEngine;
 
-public class GazeDataLogger : MonoBehaviour
+public class GazeDataLogger : MonoBehaviour  
 {
+    public GameObject myCamera;
     private void Awake()
     {
         StartCoroutine(GazeLogger());
+        Debug.Log(myCamera.transform.position.x);
+        Debug.Log(myCamera.transform.position.y);
+        Debug.Log(myCamera.transform.position.z);
+        string eyeTrackingInfo = string.Format("IsEyeCalibrationValid: {0}, IsEyeTrackingEnabled: {1}, IsEyeTrackingEnabledAndValid: {2}," +
+            "IsEyeTrackingDataValid: {3}", CoreServices.InputSystem.EyeGazeProvider.IsEyeCalibrationValid, CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabled,
+            CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabledAndValid, CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid);
+        Debug.Log(eyeTrackingInfo);
+    }
+
+    private void Start() 
+    {
+        string eyeTrackingInfo = string.Format("IsEyeCalibrationValid: {0}, IsEyeTrackingEnabled: {1}, IsEyeTrackingEnabledAndValid: {2}," +
+           "IsEyeTrackingDataValid: {3}", CoreServices.InputSystem.EyeGazeProvider.IsEyeCalibrationValid, CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabled,
+           CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabledAndValid, CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid);
+        Debug.Log(eyeTrackingInfo);
     }
     
     IEnumerator GazeLogger()
