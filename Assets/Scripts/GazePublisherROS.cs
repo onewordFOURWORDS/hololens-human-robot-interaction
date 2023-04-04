@@ -8,7 +8,8 @@ using RosMessageTypes.UnityRoboticsDemo;
 public class GazePublisherROS : MonoBehaviour
 {
     ROSConnection ros;
-    public string topicName = "Gaze_Pos";
+    public string gazeDirection_topicName = "Gaze_Pos";
+    public string gazeOrigin_topicName = "Gaze_Origin";
     public float publishMessageFrequency = 0.1f;
     private float timeElapsed;
     private float rotX = 0;
@@ -21,7 +22,8 @@ public class GazePublisherROS : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<PosRotMsg>(topicName);
+        ros.RegisterPublisher<PosRotMsg>(gazeDirection_topicName);
+        ros.RegisterPublisher<PosRotMsg>(gazeOrigin_topicName);
     }
 
     // Update is called once per frame
@@ -30,6 +32,11 @@ public class GazePublisherROS : MonoBehaviour
         float gazeDirectionX = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.x;
         float gazeDirectionY = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.y;
         float gazeDirectionZ = CoreServices.InputSystem.EyeGazeProvider.GazeDirection.z;
+
+        float gazeOriginX = CoreServices.InputSystem.EyeGazeProvider.GazeOrigin.x;
+        float gazeOriginY = CoreServices.InputSystem.EyeGazeProvider.GazeOrigin.y;
+        float gazeOriginZ = CoreServices.InputSystem.EyeGazeProvider.GazeOrigin.z;
+        
 
         timeElapsed += Time.deltaTime;
 
@@ -45,7 +52,18 @@ public class GazePublisherROS : MonoBehaviour
                 rotW
                 );
 
-            ros.Publish(topicName, gazePos);
+            PosRotMsg gazeOrigin = new PosRotMsg(
+                gazeOriginX,
+                gazeOriginY,
+                gazeOriginZ,
+                rotX,
+                rotY,
+                rotZ,
+                rotW
+            );
+
+            ros.Publish(gazeDirection_topicName, gazePos);
+            ros.Publish(gazeOrigin_topicName, gazeOrigin);
 
             timeElapsed = 0;
         }
