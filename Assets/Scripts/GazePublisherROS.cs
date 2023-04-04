@@ -9,7 +9,7 @@ public class GazePublisherROS : MonoBehaviour
 {
     ROSConnection ros;
     public string gazeDirection_topicName = "Gaze_Pos";
-    public string gazeOrigin_topicName = "Gaze_Origin"
+    public string gazeOrigin_topicName = "Gaze_Origin";
     public float publishMessageFrequency = 0.1f;
     private float timeElapsed;
     private float rotX = 0;
@@ -22,7 +22,8 @@ public class GazePublisherROS : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<PosRotMsg>(topicName);
+        ros.RegisterPublisher<PosRotMsg>(gazeDirection_topicName);
+        ros.RegisterPublisher<PosRotMsg>(gazeOrigin_topicName);
     }
 
     // Update is called once per frame
