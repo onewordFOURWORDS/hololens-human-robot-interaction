@@ -142,8 +142,6 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 1050161556769310091, guid: 6dc0b781345c96146be9f92a56c12369, type: 2}
-  - {fileID: -7030684775050044153, guid: 970da60093c7fab4699cdf14d1a7cf28, type: 2}
   - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -605,7 +603,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL
     7: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL
-    14: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;ROS2
+    14: USE_INPUT_SYSTEM_POSE_CONTROL;ROS2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
